@@ -3,19 +3,20 @@ const base_URL = "https://api.themoviedb.org/3";
 const api_URL = `${base_URL}/discover/movie?sort_by=popularity.desc&${api_KEY}`;
 const img_URL = "https://image.tmdb.org/t/p/w500";
 const searchURL = `${base_URL}/search/movie?${api_KEY}`;
+const apiHost = "http://localhost:3000";
 
 function getMovies(url) {
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => {
       displayMovies(data.results);
-      console.log(data);
+      //console.log(data);
     });
 }
 function displayMovies(data) {
   main.innerHTML = "";
   data.map((movie) => {
-    const { title, poster_path, vote_average , overview } = movie;
+    const { title, poster_path, vote_average, overview } = movie;
     const movieEl = document.createElement("div");
     movieEl.classList.add("movie");
     movieEl.innerHTML = `
@@ -30,22 +31,37 @@ function displayMovies(data) {
         <div justify-content-between>
             <span id="rate-count" class="ratings">${vote_average}</span>
             <br>
-            <div><button type="button" id="ratings-button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#Review">Review</button></div>
+            <div><button type="button" id="ratings-button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#Review_form">Review</button></div>
             <br>
           </div>
         <div id="overview">
           <h3>Overview</h3> 
           ${overview}
         </div> 
-        `   
-    document.querySelector("#main").appendChild(movieEl);  
-    
+        `;
+    document.querySelector("#main").appendChild(movieEl);
   });
 }
 
+function addReviews(evt) {
+  evt.preventDefault();
 
-function addReviews( e ) {
-  e.preventDefault();
+  const reviews = {
+  comments: document.querySelector(".form-control").value
+  }
+
+  //Notify the user to wait as review is posted
+  // const submitBtn= document.getElementById('submitbtn');
+  //   submitBtn.disable= true;
+  //   submitBtn.innerHTML='Posting your review...';
+
+  fetch(`${apiHost}/Reviews`, {
+    method: "POST",
+    body: JSON.stringify(reviews),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((resp) => resp.json());
 }
 
 document.querySelector("#form").addEventListener("submit", function (e) {
@@ -58,28 +74,10 @@ document.querySelector("#form").addEventListener("submit", function (e) {
   }
 });
 
-
 document.addEventListener("DOMContentLoaded", () => {
-   console.log('Content Loaded') 
-    getMovies(api_URL);
-    
+  console.log("Content Loaded");
+  getMovies(api_URL);
 
-  //   let count = 0;
-  // document.getElementById("ratings-button").addEventListener("click", (e) => {
-  //   const totalCount = document.getElementById("rate-count");
-
-  //   totalCount.textContent = count;
-  //   const handleIncrement = () => {
-  //     count++;
-  //     totalCount.textContent = count;
-  //   };
-  //   handleIncrement();
-  //   e.preventDefault();
-  //   console.log(e.target.value);
-  // });
-    
-
-  }
-
-  
-);
+  const addReviewForm = document.getElementById("Review_form");
+  addReviewForm.addEventListener("submit", addReviews);
+});
