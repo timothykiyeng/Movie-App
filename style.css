@@ -78,7 +78,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
   background-color: none;
-  
+  position: relative;
   place-content: center;
   justify-content: space-evenly;
 }
@@ -87,6 +87,7 @@
   position: relative;
   display: inline-block;
   justify-content: space-evenly;
+  
 
 }
 .movie_desc{
@@ -96,15 +97,13 @@
 #rate-count {
   font-style: inherit;
   font-size: 35px;
+  
 }
 
 #ratings-button{
 color: red;
-padding: 5px 12px;
-font-size: 30px;
-border: none;
-text-align: center;
-display: inline-block;
+padding: 4px 10px;
+font-size: 25px;
 
 
 }
