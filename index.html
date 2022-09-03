@@ -32,8 +32,7 @@
         <div justify-content-between>
           <span id="rate-count" class="likes">Ratings: 0</span>
 
-          
-            <button type= "button" id="ratings-button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#Review">Review</button>
+            <button type= "button" id="ratings-button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#Review_form">Review</button>
           <br>
           
         </div>
@@ -47,27 +46,6 @@
         </div>
       </div>
     </main>
-    <!-- Modal for submitting reviews -->
-    <div class="modal fade" id="Review" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <form class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Give a Review</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="Comment">Review</label>
-              <input type="text" class="form-control">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
-      </div>
-    </div>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
       integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
@@ -78,5 +56,28 @@
       integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
       crossorigin="anonymous"
     ></script>
+
+<!-- Modal for submitting reviews -->
+<div class="modal fade" id="Review_form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Give a Review</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="Comment">Review</label>
+          <input type="text" id="Comment" class="form-control">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" required id="submitbtn">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
   </body>
 </html>
